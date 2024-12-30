@@ -1,3 +1,11 @@
+# Lexiconic
+
+_This repository is an extension of a previous, smaller project: a web scraper built in Ruby whose function is scraping the classics page from [goodreads](https://www.goodreads.com) to return book recommendations for my next reads._
+
+Lexiconic allows users to chat with an OpenAI Chatbot engineered to specifically send book recommendations based on the user's preferences.
+
+---
+
 This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
 
 ## Getting Started
