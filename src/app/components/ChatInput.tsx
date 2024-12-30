@@ -24,8 +24,35 @@ const ChatInput: FC<ChatInputProps> = ({ className, ...props }) => {
 
             return response.body
         },
-        onSuccess: () => {
-            console.log("success")
+        onSuccess: (stream) => {
+            // get readable stream from server
+            if (!stream) {
+                throw new Error('No stream');
+            }
+
+            // construct new message to add
+            const id = nanoid()
+            const responseMessage: Message = {
+                id,
+                isUserMessage: false,
+                text: '',
+            }
+
+            // add new message to state
+            addMessage(responseMessage)
+
+            setIsMessageUpdating(true)
+
+            const reader = stream.getReader()
+            const decoder = new TextDecoder()
+            let done = false
+
+            while (!done) {
+                const { value, done: doneReading } = await reader.read()
+                done = doneReading
+                const chunkValue = decoder.decode(value)
+                updateMessage(id, (prev) => prev + chunkValue)
+            }
         }
     })
 
