@@ -77,7 +77,9 @@ const ChatInput: FC<ChatInputProps> = ({ className, ...props }) => {
                 textareaRef.current?.focus()
             }, 10)
         },
+        // error handling
         onError: (_, message) => {
+            // console.log('this error got called')
             toast.error('Something went wrong. Please try again.')
             removeMessage(message.id)
             textareaRef.current?.focus()
